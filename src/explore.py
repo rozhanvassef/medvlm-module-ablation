@@ -52,8 +52,6 @@ from pathlib import Path
 
 from PIL import ImageOps
 
-import matplotlib
-matplotlib.use("Agg")  # non-interactive backend; notebook overrides this
 import matplotlib.pyplot as plt
 
 from .data import REGISTRY, classify_answer_type, load_benchmark
@@ -377,6 +375,13 @@ def run_all(names: list[str], out_dir: Path, n_grid: int = 8,
 
 
 def main() -> None:
+    # Force a headless backend, but ONLY for CLI use. Doing this at import time
+    # would clobber a notebook's inline backend -- `from src import explore`
+    # would silently stop figures from displaying, and they would go to disk
+    # only. Backend selection belongs to the entry point, not the library.
+    import matplotlib
+    matplotlib.use("Agg", force=True)
+
     p = argparse.ArgumentParser(description="Explore a medical VQA dataset")
     p.add_argument("--dataset", action="append", choices=list(REGISTRY),
                    help="repeatable, e.g. --dataset vqa_rad --dataset slake")
