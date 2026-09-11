@@ -1,0 +1,47 @@
+# ---------------------------------------------------------------------------
+# Requirements for the medical-VQA zero-shot baseline (Step 1).
+#
+# NOTE ON PINNING: versions are lower bounds, not exact pins, because Colab
+# ships its own torch build tied to the runtime's CUDA driver. Forcing an exact
+# torch version usually breaks the GPU. Let Colab keep its torch; we only
+# upgrade the HuggingFace stack around it. torch is therefore NOT listed here.
+#
+# Before freezing this project for submission, run
+#     pip freeze > requirements.lock.txt
+# from inside Colab so the exact environment is recorded.
+#
+# NOTHING IN THIS FILE IS NEEDED to run tests/ or scripts/compare_baselines.py.
+# Those are standard-library only, on purpose, so results analysis works on a
+# laptop with no GPU and no installs. See requirements-local.txt.
+# ---------------------------------------------------------------------------
+
+# Core HF stack.
+# 4.56 is the floor, NOT 4.51: from_pretrained renamed `torch_dtype` -> `dtype`
+# in 4.56. src/model.py detects the version and passes the right one either
+# way, but staying above the rename avoids deprecation noise. If you switch to
+# Qwen3-VL and hit "Unrecognized configuration class", upgrade transformers.
+transformers>=4.56.0
+accelerate>=0.34.0
+
+# datasets 4.x removed support for script-based ("loading script") datasets.
+# Our primary ids are parquet-backed and unaffected, but the BoKelvin/SLAKE
+# fallback in src/data.py IS script-based and will not load on 4.x. If the
+# primary SLAKE mirror disappears, either find another parquet mirror or pin
+# datasets<4.0 temporarily.
+datasets>=2.20.0,<4.0.0
+
+# Turns Qwen chat messages into properly-resized image tensors.
+# This is what applies min_pixels / max_pixels. Do not skip it.
+qwen-vl-utils>=0.0.10
+
+# 4-bit quantisation. CUDA ONLY -- there is no usable CPU or Intel-iGPU path.
+bitsandbytes>=0.43.0
+
+# Figures for notebooks/00_dataset_exploration.ipynb (src/explore.py).
+# Pre-installed on Colab; listed so a clean checkout works anywhere.
+matplotlib>=3.7.0
+
+# Utilities
+Pillow>=10.0.0
+pyyaml>=6.0
+tqdm>=4.66.0

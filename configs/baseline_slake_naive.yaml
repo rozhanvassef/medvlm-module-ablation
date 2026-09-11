@@ -1,0 +1,16 @@
+# OPTIONAL. SLAKE with no formatting instruction.
+# Only needed if you want the naive->constrained format-gap number on SLAKE as
+# well as VQA-RAD. Costs a full extra pass (~30-45 min on a T4) and the VQA-RAD
+# version already makes the point. Skip on a first pass; run it before you
+# write the report if you want the claim to hold on both benchmarks.
+model_id: "Qwen/Qwen2.5-VL-3B-Instruct"
+dataset: "slake"
+prompt_style: "naive"
+blind: false
+load_in_4bit: true
+min_pixels_tokens: 256
+max_pixels_tokens: 768
+batch_size: 4
+max_new_tokens: 64      # naive prompt produces longer answers; give it room
+seed: 0
+output_dir: "outputs/baseline"

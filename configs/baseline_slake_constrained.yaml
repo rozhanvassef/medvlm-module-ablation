@@ -1,0 +1,14 @@
+# THE VALIDATION RUN. Published Qwen2.5-VL zero-shot on SLAKE is
+# roughly 51% open / 67% closed. If this run lands near those numbers,
+# the harness is correct and you may proceed to training.
+model_id: "Qwen/Qwen2.5-VL-3B-Instruct"
+dataset: "slake"
+prompt_style: "constrained"
+blind: false
+load_in_4bit: true
+min_pixels_tokens: 256
+max_pixels_tokens: 768
+batch_size: 4
+max_new_tokens: 32
+seed: 0
+output_dir: "outputs/baseline"

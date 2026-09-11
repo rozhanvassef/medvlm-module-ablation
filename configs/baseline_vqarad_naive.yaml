@@ -1,0 +1,14 @@
+# SECONDARY: same model, no formatting instruction.
+# The gap vs the constrained run measures how much of the "medical gap"
+# is really a formatting gap.
+model_id: "Qwen/Qwen2.5-VL-3B-Instruct"
+dataset: "vqa_rad"
+prompt_style: "naive"
+blind: false
+load_in_4bit: true
+min_pixels_tokens: 256
+max_pixels_tokens: 768
+batch_size: 4
+max_new_tokens: 64      # naive prompt produces longer answers; give it room
+seed: 0
+output_dir: "outputs/baseline"

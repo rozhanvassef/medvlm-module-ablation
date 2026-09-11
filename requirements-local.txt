@@ -1,0 +1,16 @@
+# ---------------------------------------------------------------------------
+# LOCAL (no-GPU) requirements. Deliberately almost empty.
+#
+# On a machine with no NVIDIA GPU you can still do a surprising amount:
+#
+#   python tests/test_normalize_metrics.py                  <- zero installs
+#   python scripts/compare_baselines.py --output_dir ...    <- zero installs
+#
+# Both are standard-library only. Install the line below ONLY if you also want
+# to run `python -m src.data --inspect ...` locally, which downloads dataset
+# parquet files (a few hundred MB) and needs pyarrow.
+#
+# If disk space is tight, skip it entirely and inspect datasets on Colab.
+# ---------------------------------------------------------------------------
+
+# datasets>=2.20.0,<4.0.0

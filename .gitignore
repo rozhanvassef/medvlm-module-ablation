@@ -1,0 +1,10 @@
+__pycache__/
+*.py[cod]
+outputs/
+*.jsonl
+*.meta.json
+hf_cache/
+.ipynb_checkpoints/
+.DS_Store
+figures/
+.venv/

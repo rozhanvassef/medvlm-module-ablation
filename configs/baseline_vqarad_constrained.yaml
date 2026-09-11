@@ -1,0 +1,13 @@
+# PRIMARY BASELINE: VQA-RAD, honest (constrained) prompt.
+# This is the number your fine-tuned model must beat.
+model_id: "Qwen/Qwen2.5-VL-3B-Instruct"
+dataset: "vqa_rad"
+prompt_style: "constrained"
+blind: false
+load_in_4bit: true
+min_pixels_tokens: 256
+max_pixels_tokens: 768
+batch_size: 4
+max_new_tokens: 32
+seed: 0
+output_dir: "outputs/baseline"

@@ -1,0 +1,18 @@
+# SLAKE LANGUAGE-PRIOR FLOOR. Same as the constrained run, image removed.
+# SLAKE ships explicit OPEN/CLOSED labels, which makes its blind floor the more
+# meaningful of the two -- the closed/open split is the dataset's own, not ours.
+#
+# An explicit config rather than `--blind` on the sighted config: the YAML file
+# IS the experiment log, and a run that exists only as a flag typed into a
+# notebook cell is a run you cannot reproduce in six weeks.
+model_id: "Qwen/Qwen2.5-VL-3B-Instruct"
+dataset: "slake"
+prompt_style: "constrained"
+blind: true
+load_in_4bit: true
+min_pixels_tokens: 256
+max_pixels_tokens: 768
+batch_size: 8           # no images -> much cheaper, bigger batches fine
+max_new_tokens: 32
+seed: 0
+output_dir: "outputs/baseline"

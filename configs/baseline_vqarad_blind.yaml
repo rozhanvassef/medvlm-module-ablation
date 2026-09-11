@@ -1,0 +1,14 @@
+# LANGUAGE-PRIOR FLOOR: identical, but the image is removed.
+# Whatever this scores is NOT vision. Subtract it mentally from every
+# other number in the project.
+model_id: "Qwen/Qwen2.5-VL-3B-Instruct"
+dataset: "vqa_rad"
+prompt_style: "constrained"
+blind: true
+load_in_4bit: true
+min_pixels_tokens: 256
+max_pixels_tokens: 768
+batch_size: 8           # no images -> much cheaper, bigger batches fine
+max_new_tokens: 32
+seed: 0
+output_dir: "outputs/baseline"
